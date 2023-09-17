@@ -12,6 +12,7 @@ function App(): JSX.Element {
 const styles = StyleSheet.create({
   container: {
     paddingTop: Platform.OS === "android" && 30 ,
+    flex: 1, 
     backgroundColor: 'rgba(7,26,93,255)',
   }
 });
