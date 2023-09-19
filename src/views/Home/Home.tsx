@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import {View, StyleSheet} from "react-native";
 
 import Header from "../../components/Header";
+import TodaysImage from "../../components/TodaysImage";
 import fetchApi from '../../utils/fetch';
+import { PostImage } from "../../types";
 
 const Home = () => {
 
-    const [todaysImage, setTodaysImage] = useState();
+    const [todaysImage, setTodaysImage] = useState<PostImage>({});
 
     useEffect(() => {
        const loadTodayImage = async () => {
@@ -15,7 +17,7 @@ const Home = () => {
                 setTodaysImage(todaysImageResponse);
             } catch (error) {
 
-                setTodaysImage(undefined);
+                setTodaysImage({});
             }
        };
 
@@ -28,6 +30,7 @@ const Home = () => {
     return (
         <View style={styles.container}>
             <Header />
+            <TodaysImage {...todaysImage} />
         </View>
     );
 };
