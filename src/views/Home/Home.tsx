@@ -7,12 +7,13 @@ import TodaysImage from "../../components/TodaysImage";
 import FiveLastDaysImages from "../../components/FiveLastDaysImages";
 
 import fetchApi from '../../utils/fetch';
-import { PostImage } from "../../types";
+import { PostImage as PostImagesTypes } from "../../types";
+import PostImages from '../../components/PostImage/PostImage';
 
 const Home = () => {
 
-    const [todaysImage, setTodaysImage] = useState<PostImage>({});
-    const [lastFiveDaysImages,setLastFiveDaysImages] = useState<PostImage[]>([]);
+    const [todaysImage, setTodaysImage] = useState<PostImagesTypes>({});
+    const [lastFiveDaysImages,setLastFiveDaysImages] = useState<PostImagesTypes[]>([]);
 
 
     useEffect(() => {
@@ -53,13 +54,13 @@ const Home = () => {
 
     
 
-    console.log(lastFiveDaysImages);
+    // console.log(lastFiveDaysImages);
 
     return (
         <View style={styles.container}>
             <Header />
             <TodaysImage {...todaysImage} />
-            <FiveLastDaysImages />
+            <FiveLastDaysImages postImages={lastFiveDaysImages} />
         </View>
     );
 };
