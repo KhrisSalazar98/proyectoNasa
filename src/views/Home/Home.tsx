@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {View, StyleSheet} from "react-native";
+import {format, sub} from 'date-fns';
 
 import Header from "../../components/Header";
 import TodaysImage from "../../components/TodaysImage";
@@ -9,9 +10,11 @@ import { PostImage } from "../../types";
 const Home = () => {
 
     const [todaysImage, setTodaysImage] = useState<PostImage>({});
+    const [lastFiveDaysImages,setLastFiveDaysImages] = useState<PostImage[]>([]);
+
 
     useEffect(() => {
-       const loadTodayImage = async () => {
+        const loadTodayImage = async () => {
             try {
                 const todaysImageResponse = await fetchApi();
                 setTodaysImage(todaysImageResponse);
@@ -19,13 +22,36 @@ const Home = () => {
 
                 setTodaysImage({});
             }
-       };
+        };
+
+        const loadLast5DaysImages = async () => {
+            try {
+                
+                const date = new Date();
+                const todaysDate = format(date, 'yyyy-MM-dd');
+                const fiveDaysAgoDate = format(sub(date, {days: 5}), 'yyyy-MM-dd');
+
+                // console.log(todaysDate, fiveDaysAgoDate);
+
+                const lastFiveDaysImagesResponse = await fetchApi(`&start_date=${fiveDaysAgoDate}&end_date=${todaysDate}`); 
+
+                setLastFiveDaysImages(lastFiveDaysImagesResponse);
+
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+
 
        loadTodayImage().catch(null);
+       loadLast5DaysImages().catch(null);
 
     }, []);
 
-    console.log(todaysImage);
+    
+
+    console.log(lastFiveDaysImages);
 
     return (
         <View style={styles.container}>
