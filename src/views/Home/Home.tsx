@@ -4,6 +4,8 @@ import {format, sub} from 'date-fns';
 
 import Header from "../../components/Header";
 import TodaysImage from "../../components/TodaysImage";
+import FiveLastDaysImages from "../../components/FiveLastDaysImages";
+
 import fetchApi from '../../utils/fetch';
 import { PostImage } from "../../types";
 
@@ -57,6 +59,7 @@ const Home = () => {
         <View style={styles.container}>
             <Header />
             <TodaysImage {...todaysImage} />
+            <FiveLastDaysImages />
         </View>
     );
 };
