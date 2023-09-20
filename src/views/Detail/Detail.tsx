@@ -1,9 +1,11 @@
 import React from "react";
-import {View} from "react-native";
+import { View, Text } from 'react-native';
 
 const Detail = () => {
     return (
-        <View>Detail</View>
+        <View>
+            <Text>Detail</Text>
+        </View>
     );
 }
 
